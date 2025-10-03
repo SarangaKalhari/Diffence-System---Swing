@@ -10,4 +10,6 @@ package deffencesystem.interfaces;
  */
 public interface Observer {
     
+    public void updateStatus(String status);
+    
 }

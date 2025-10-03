@@ -1,19 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package deffencesystem.GUI;
+
+import deffencesystem.classes.Observerable;
+import deffencesystem.interfaces.Observer;
 
 /**
  *
  * @author Lenovo
  */
-public class Tank extends javax.swing.JFrame {
+public class Tank extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form Tank
      */
-    public Tank() {
+    public Tank(Observerable observerable) {
         initComponents();
     }
 
@@ -216,67 +216,30 @@ public class Tank extends javax.swing.JFrame {
     }//GEN-LAST:event_rotateActionPerformed
 
     private void soilderSpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_soilderSpStateChanged
-        soilders = (int) soilderSp.getValue();
+        
     }//GEN-LAST:event_soilderSpStateChanged
 
     private void ammoSpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ammoSpStateChanged
-        ammo= (int) ammoSp.getValue();        // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_ammoSpStateChanged
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        fuel = jSlider1.getValue();
+        
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void positionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positionActionPerformed
-        if(position.isSelected()){
-            observerable.setSliderValue(sliderValue);
-        }
-        positionAm = position.isSelected() ? 1 : 0;
+        
     }//GEN-LAST:event_positionActionPerformed
 
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendActionPerformed
-        observerable.sendMessage("Tank : "+textField.getText());
+        
     }//GEN-LAST:event_sendActionPerformed
 
     private void shootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shootActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_shootActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Tank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Tank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Tank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tank.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Tank().setVisible(true);
-            }
-        });
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner ammoSp;
     private javax.swing.JLabel jLabel1;
@@ -295,4 +258,9 @@ public class Tank extends javax.swing.JFrame {
     private javax.swing.JTextArea textArea;
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void updateStatus(String status) {
+        
+    }
 }
