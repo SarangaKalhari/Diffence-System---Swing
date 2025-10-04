@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+
 package deffencesystem.interfaces;
 
 /**
@@ -9,5 +6,7 @@ package deffencesystem.interfaces;
  * @author Lenovo
  */
 public interface getData {
+    
+    public int[] currentData();
     
 }

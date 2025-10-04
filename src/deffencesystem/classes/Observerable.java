@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package deffencesystem.classes;
 
 import deffencesystem.interfaces.MainCaller;
@@ -27,6 +24,11 @@ public class Observerable implements MainCaller{
         for(Observer ob : observers){
             ob.updateStatus(status);
         }
+    }
+
+    @Override
+    public void setSliderValue(int value) {
+        
     }
     
     

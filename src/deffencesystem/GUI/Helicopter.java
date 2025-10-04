@@ -3,12 +3,13 @@ package deffencesystem.GUI;
 
 import deffencesystem.classes.Observerable;
 import deffencesystem.interfaces.Observer;
+import deffencesystem.interfaces.getData;
 
 /**
  *
  * @author Lenovo
  */
-public class Helicopter extends javax.swing.JFrame implements Observer{
+public class Helicopter extends javax.swing.JFrame implements Observer, getData{
     private Observerable observerable;
     private int sliderValue;
 
@@ -268,5 +269,25 @@ public class Helicopter extends javax.swing.JFrame implements Observer{
     @Override
     public void updateStatus(String status) {
         
+    }
+
+    @Override
+    public int[] currentData() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setButton(int value) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setMessage(String messages) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void sendPrivateMessage() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

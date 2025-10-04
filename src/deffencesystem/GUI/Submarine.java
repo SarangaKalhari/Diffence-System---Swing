@@ -3,18 +3,30 @@ package deffencesystem.GUI;
 
 import deffencesystem.classes.Observerable;
 import deffencesystem.interfaces.Observer;
+import deffencesystem.interfaces.getData;
 
 /**
  *
  * @author Lenovo
  */
-public class Submarine extends javax.swing.JFrame implements Observer{
-
-    /**
-     * Creates new form Submarine
-     */
+public class Submarine extends javax.swing.JFrame implements Observer, getData{
+    private Observerable observerable;
+    
     public Submarine(Observerable observerable) {
         initComponents();
+        setTitle("Submarine");
+        setVisible(true);
+        this.observerable=observerable;
+        
+        shoot.setEnabled(false);
+        sonar.setEnabled(false);
+        towhawk.setEnabled(false);
+        trindent.setEnabled(false);
+        
+        oxygenSlider.setValue(100);
+        energySlider.setValue(100);
+       
+        
     }
 
      
@@ -357,5 +369,25 @@ public class Submarine extends javax.swing.JFrame implements Observer{
     @Override
     public void updateStatus(String status) {
         
+    }
+
+    @Override
+    public int[] currentData() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setButton(int value) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void setMessage(String messages) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void sendPrivateMessage() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
