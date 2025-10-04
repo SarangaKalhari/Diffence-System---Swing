@@ -4,6 +4,9 @@ package deffencesystem.GUI;
 import deffencesystem.classes.Observerable;
 import deffencesystem.interfaces.Observer;
 import deffencesystem.interfaces.getData;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 /**
  *
@@ -11,6 +14,13 @@ import deffencesystem.interfaces.getData;
  */
 public class Submarine extends javax.swing.JFrame implements Observer, getData{
     private Observerable observerable;
+    private int sliderValue;
+    
+    private int soilders;
+    private int ammo;
+    private int fuel;
+    private int positionAm;
+    
     
     public Submarine(Observerable observerable) {
         initComponents();
@@ -27,9 +37,65 @@ public class Submarine extends javax.swing.JFrame implements Observer, getData{
         energySlider.setValue(100);
        
         
+        Timer timer;   
+        timer = new Timer(3000, new ActionListener() {   
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                oxygenSlider.setValue(oxygenSlider.getValue()-1);
+                energySlider.setValue(energySlider.getValue()-1);
+            }
+        });
+        timer.start();
     }
 
-     
+    @Override
+    public void updateStatus(String status) {
+        jLabel1.setText(status);
+    }
+
+    @Override
+    public int[] currentData() {
+       int[] data = {soilders,fuel,ammo,positionAm};
+       return data;
+    }
+
+    @Override
+    public void setButton(int value) {
+        if(position.isSelected()){
+            if(value>=20){
+                shoot.setEnabled(true);
+            }else{
+                shoot.setEnabled(false);
+            }    
+            if(value>=40){
+                sonar.setEnabled(true);
+            }else{
+                sonar.setEnabled(false);
+            }    
+            if(value>=60 ){
+                towhawk.setEnabled(true);
+            }else{
+                towhawk.setEnabled(false);
+            }
+            
+            if(value>=80){
+                trindent.setEnabled(true);
+            }else{
+                trindent.setEnabled(false);
+            }
+        }
+    }
+
+    @Override
+    public void setMessage(String messages) {
+       textArea.append(messages+"\n");
+    }
+
+    @Override
+    public void sendPrivateMessage() {
+        
+    } 
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -296,7 +362,7 @@ public class Submarine extends javax.swing.JFrame implements Observer, getData{
     }// </editor-fold>//GEN-END:initComponents
 
     private void energySliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_energySliderStateChanged
-        
+         energy.setText(""+energySlider.getValue());
     }//GEN-LAST:event_energySliderStateChanged
 
     private void shootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shootActionPerformed
@@ -304,11 +370,15 @@ public class Submarine extends javax.swing.JFrame implements Observer, getData{
     }//GEN-LAST:event_shootActionPerformed
 
     private void positionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positionActionPerformed
+        if(position.isSelected()){
+          observerable.setSliderValue(sliderValue);
+        }
         
+        positionAm = position.isSelected() ? 1 : 0;
     }//GEN-LAST:event_positionActionPerformed
 
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendActionPerformed
-        
+        observerable.sendMessage("Submarine : "+textField.getText());
     }//GEN-LAST:event_sendActionPerformed
 
     private void trindentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trindentActionPerformed
@@ -316,19 +386,19 @@ public class Submarine extends javax.swing.JFrame implements Observer, getData{
     }//GEN-LAST:event_trindentActionPerformed
 
     private void oxygenSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_oxygenSliderStateChanged
-        // TODO add your handling code here:
+        oxygen.setText(""+oxygenSlider.getValue());
     }//GEN-LAST:event_oxygenSliderStateChanged
 
     private void jSlider4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider4StateChanged
-        
+        fuel = jSlider4.getValue();
     }//GEN-LAST:event_jSlider4StateChanged
 
     private void soilderSpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_soilderSpStateChanged
-        
+        soilders = (int) soilderSp.getValue();
     }//GEN-LAST:event_soilderSpStateChanged
 
     private void ammoSpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ammoSpStateChanged
-        
+        ammo= (int) ammoSp.getValue();
     }//GEN-LAST:event_ammoSpStateChanged
 
     private void energyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_energyActionPerformed
@@ -366,28 +436,5 @@ public class Submarine extends javax.swing.JFrame implements Observer, getData{
     private javax.swing.JButton trindent;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void updateStatus(String status) {
-        
-    }
-
-    @Override
-    public int[] currentData() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void setButton(int value) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void setMessage(String messages) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void sendPrivateMessage() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }

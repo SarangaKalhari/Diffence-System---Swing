@@ -3,6 +3,8 @@ package deffencesystem.GUI;
 
 import deffencesystem.classes.Observerable;
 import deffencesystem.interfaces.Observer;
+import deffencesystem.interfaces.getData;
+import java.util.ArrayList;
 
 /**
  *
@@ -261,19 +263,47 @@ public class MainController extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_privateCheckActionPerformed
 
     private void collectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_collectionActionPerformed
+        int options = optionCombo.getSelectedIndex();
+        ArrayList<Observer> op = observerable.getObservers();
         
+        int[] array = ((getData)op.get(options)).currentData();
+        
+        System.out.println(array[0]+""+array[1]+""+array[2]+""+array[3]);
+        
+        
+        soilC.setText(""+array[0]);
+        fuelC.setText(""+array[1]+" L");
+        ammoC.setText(""+array[2]);
+        
+        if(array[3]==0){
+            posiSt.setText("Disable");
+        }else if(array[3]==1){
+            posiSt.setText("Enable");
+        }
     }//GEN-LAST:event_collectionActionPerformed
 
     private void areaCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaCheckBoxActionPerformed
+        String status;
+        status = areaCheckBox.isSelected() ? "Area is Cleared" : "Area is not Cleared";
+        observerable.notifyObservers(status);
         
     }//GEN-LAST:event_areaCheckBoxActionPerformed
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        
+        observerable.setSliderValue(jSlider1.getValue());
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        if(privateCheck.isSelected()){
+            int options = optionCombo.getSelectedIndex();
+            ArrayList<Observer> list = observerable.getObservers();
+            list.get(options).setMessage("Main Unit : "+mainTArea.getText());
+            mainTArea.setText("");
+            
+        }else{
+            observerable.sendMessage("Main Unit : "+mainTArea.getText());
+            mainTArea.setText("");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
@@ -304,17 +334,17 @@ public class MainController extends javax.swing.JFrame implements Observer{
 
     @Override
     public void setButton(int value) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
     @Override
     public void setMessage(String messages) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        textArea1.append(messages+"\n");
     }
 
     @Override
     public void sendPrivateMessage() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
     

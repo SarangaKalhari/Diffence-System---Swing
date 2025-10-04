@@ -18,9 +18,7 @@ public class Helicopter extends javax.swing.JFrame implements Observer, getData{
     private int fuel;
     private int positionAm;
 
-    /**
-     * Creates new form Helicopter
-     */
+    
     public Helicopter(Observerable observerable) {
         initComponents();
         setTitle("Helicopter");
@@ -29,6 +27,49 @@ public class Helicopter extends javax.swing.JFrame implements Observer, getData{
         shoot.setEnabled(false);
         missileOperation.setEnabled(false);
         laser.setEnabled(false);
+    }
+    
+    @Override
+    public void updateStatus(String status) {
+        lblArea.setText(status);
+    }
+
+    @Override
+    public int[] currentData() {
+        int[] data = {soilders,fuel,ammo,positionAm};
+        return data;
+    }
+
+    @Override
+    public void setButton(int value) {
+        if(position.isSelected()){
+            if(value>=20){
+                shoot.setEnabled(true);
+            }else{
+                shoot.setEnabled(false);
+            }    
+            if(value>=40){
+                missileOperation.setEnabled(true);
+            }else {
+                missileOperation.setEnabled(false);
+            }    
+            if(value>=60 ){
+                laser.setEnabled(true);
+            }else{
+                laser.setEnabled(false);
+            }
+        
+        }
+    }
+
+    @Override
+    public void setMessage(String messages) {
+        textArea.append(messages+"\n");
+    }
+
+    @Override
+    public void sendPrivateMessage() {
+        
     }
 
     /**
@@ -220,15 +261,15 @@ public class Helicopter extends javax.swing.JFrame implements Observer, getData{
     }// </editor-fold>//GEN-END:initComponents
 
     private void soilderSpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_soilderSpStateChanged
-        
+        soilders = (int) soilderSp.getValue();
     }//GEN-LAST:event_soilderSpStateChanged
 
     private void ammoSpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ammoSpStateChanged
-        
+        ammo= (int) ammoSp.getValue();
     }//GEN-LAST:event_ammoSpStateChanged
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        
+        fuel = jSlider1.getValue();
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void textFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldActionPerformed
@@ -240,11 +281,15 @@ public class Helicopter extends javax.swing.JFrame implements Observer, getData{
     }//GEN-LAST:event_shootActionPerformed
 
     private void positionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positionActionPerformed
-       
+       if(position.isSelected()){
+            observerable.setSliderValue(sliderValue);
+        }
+        
+        positionAm = position.isSelected() ? 1 : 0;
     }//GEN-LAST:event_positionActionPerformed
 
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendActionPerformed
-        
+        observerable.sendMessage("Helicopter : "+textField.getText());
     }//GEN-LAST:event_sendActionPerformed
 
 
@@ -266,28 +311,5 @@ public class Helicopter extends javax.swing.JFrame implements Observer, getData{
     private javax.swing.JTextField textField;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void updateStatus(String status) {
-        
-    }
-
-    @Override
-    public int[] currentData() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void setButton(int value) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void setMessage(String messages) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void sendPrivateMessage() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 }

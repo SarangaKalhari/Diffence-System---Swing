@@ -11,6 +11,12 @@ import deffencesystem.interfaces.getData;
  */
 public class Tank extends javax.swing.JFrame implements Observer, getData{
     private Observerable observerable;
+    private int sliderValue;
+    
+    private int soilders;
+    private int ammo;
+    private int fuel;
+    private int positionAm;
     
     /**
      * 
@@ -222,23 +228,26 @@ public class Tank extends javax.swing.JFrame implements Observer, getData{
     }//GEN-LAST:event_rotateActionPerformed
 
     private void soilderSpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_soilderSpStateChanged
-        
+        soilders = (int) soilderSp.getValue();
     }//GEN-LAST:event_soilderSpStateChanged
 
     private void ammoSpStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ammoSpStateChanged
-        // TODO add your handling code here:
+        ammo= (int) ammoSp.getValue(); // TODO add your handling code here:
     }//GEN-LAST:event_ammoSpStateChanged
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        
+         fuel = jSlider1.getValue();
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void positionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positionActionPerformed
-        
+        if(position.isSelected()){
+           observerable.setSliderValue(sliderValue);
+        }
+        positionAm = position.isSelected() ? 1 : 0;   
     }//GEN-LAST:event_positionActionPerformed
 
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendActionPerformed
-        
+        observerable.sendMessage("Tank : "+textField.getText());
     }//GEN-LAST:event_sendActionPerformed
 
     private void shootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shootActionPerformed
@@ -267,26 +276,49 @@ public class Tank extends javax.swing.JFrame implements Observer, getData{
 
     @Override
     public void updateStatus(String status) {
-        
+        jLabel1.setText(status);
     }
 
     @Override
     public int[] currentData() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int[] data = {soilders,fuel,ammo,positionAm};
+        return data;
     }
 
     @Override
     public void setButton(int value) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(position.isSelected()){
+            if(value>=20){
+                shoot.setEnabled(true);
+            }else{
+                shoot.setEnabled(false);
+            }
+            if(value>=40){
+                missile.setEnabled(true);
+            }else{
+                missile.setEnabled(false);
+            }    
+            if(value>=60 ){
+                redar.setEnabled(true);
+            }else{
+                redar.setEnabled(false);
+            }
+            if(value>=80){
+                rotate.setEnabled(true);
+            }else{
+                rotate.setEnabled(false);
+            }
+        }
+        
     }
 
     @Override
     public void setMessage(String messages) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        textArea.append(messages+"\n");
     }
 
     @Override
     public void sendPrivateMessage() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 }
