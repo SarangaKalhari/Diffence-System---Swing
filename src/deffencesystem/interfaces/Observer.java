@@ -10,4 +10,12 @@ package deffencesystem.interfaces;
  */
 public interface Observer {
     
+    public void updateStatus(String status);
+    
+    public void setButton(int value);
+    
+    public void setMessage(String messages);
+    
+    public void sendPrivateMessage();
+    
 }

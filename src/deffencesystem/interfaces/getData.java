@@ -5,7 +5,8 @@ package deffencesystem.interfaces;
  *
  * @author Lenovo
  */
-public interface MainCaller {
+public interface getData {
     
-    void setSliderValue(int value);
+    public int[] currentData();
+    
 }
