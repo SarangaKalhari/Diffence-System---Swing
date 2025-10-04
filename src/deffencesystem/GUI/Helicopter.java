@@ -9,12 +9,25 @@ import deffencesystem.interfaces.Observer;
  * @author Lenovo
  */
 public class Helicopter extends javax.swing.JFrame implements Observer{
+    private Observerable observerable;
+    private int sliderValue;
+
+    private int soilders;
+    private int ammo;
+    private int fuel;
+    private int positionAm;
 
     /**
      * Creates new form Helicopter
      */
     public Helicopter(Observerable observerable) {
         initComponents();
+        setTitle("Helicopter");
+        setVisible(true);
+        this.observerable=observerable;
+        shoot.setEnabled(false);
+        missileOperation.setEnabled(false);
+        laser.setEnabled(false);
     }
 
     /**
